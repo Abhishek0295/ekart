@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Alert from '@mui/material/Alert';
+import Button from '@mui/material/Button';
 
 const Buy = () => {
   const [formData, setFormData] = useState({
@@ -110,14 +112,22 @@ const Buy = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log('Form submitted successfully!');
-      alert("Form submitted successfully!");
+      setSubmitSuccess(true);
     } else {
       console.log('Form has errors, please fix them');
     }
   };
 
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+
   return (
+    <>
+    {submitSuccess && (
+      <Alert variant="filled" severity="success" action={<Button color="inherit" size="small" onClick={() => setSubmitSuccess(false)}>UNDO</Button>}>
+        CONGRATULATIONS!🥳🎉 Your order placed successfully!
+      </Alert>
+    )}
     <form onSubmit={handleSubmit} className="container mt-5">
       <div className="mb-3">
         <label htmlFor="email" className="form-label">Email:</label>
@@ -261,8 +271,10 @@ const Buy = () => {
         />
         {errors.phoneNumber && <span className="text-danger">{errors.phoneNumber}</span>}
       </div>
+      
       <button type="submit" className="btn btn-primary">Submit</button>
     </form>
+    </>
   );
 };
 

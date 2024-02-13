@@ -1,5 +1,4 @@
-import { useState } from 'react'
-// import Product from './product'
+import React from 'react'
 import Router from './Components/Routing/router.jsx'
 
 import '../node_modules/bootstrap/dist/css/bootstrap.css'

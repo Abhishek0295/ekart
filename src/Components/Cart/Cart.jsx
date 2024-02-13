@@ -1,27 +1,52 @@
-import React, { useEffect, useState } from 'react';
+import { Difference } from '@mui/icons-material';
+import React from 'react';
+import { useState, useEffect } from 'react';
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([]);
+  // Fetch cart items from localStorage or from state if you're managing it globally
+  const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+  // console.log(cartItems)
 
+  const arr = []
+
+  for(let i in cartItems){
+    const key = [];
+    key.push(i)
+    key.push(cartItems[i])
+    arr.push(key)
+  }
+  console.log(arr)
+
+  const [pro, setPro] = useState([])
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products/1')
-      .then(res => res.json())
-      .then(json => setCartItems([json])); // Set the fetched data to cartItems
+    fetch(`https://fakestoreapi.com/products/`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setPro(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error.message);
+        setLoading(false);
+      });
   }, []);
+
+    if(arr.length==pro.length){
+     
+    }
+
 
   return (
     <div>
-      {cartItems.map(item => (
-        <div className="card text-bg-dark" key={item.id} style={{ width: "20rem", height:'20vw'}}>
-          <img src={item.image} className="d-flex justify-content-center align-self-center p-3"  alt="..." style={{ width: "20rem", height:'20vw'}}/>
-          <div className="card-img-overlay">
-            <h5 className="card-title">{item.title}</h5>
-            <p className="card-text">{item.description}</p>
-            <p className="card-text">Quantity: {item.quantity}</p> {/* Note: There's no quantity property in the API response */}
-            <p className="card-text"><small>Last updated 3 mins ago</small></p>
-          </div>
-        </div>
-      ))}
+      {/* <h1>hello thi cart</h1>
+     
+      {arr.map((val)=><h1>{val[0]} : {val[1]}</h1> )} */}
+      {/* <h1>{pro.(val).title}</h1> */}
     </div>
   );
 };
