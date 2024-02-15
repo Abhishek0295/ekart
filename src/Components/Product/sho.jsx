@@ -12,6 +12,7 @@ const Sho = () => {
       .catch((error) => console.error('Error fetching product:', error));
   }, [id]);
 
+  
   const addToCart = () => {
     if (!product) return; // Ensure product is available before adding to cart
     const quantity = 1;

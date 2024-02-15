@@ -6,6 +6,7 @@ import Cart from '../Cart/Cart';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
+import Login from '../Login/login';
 
 const Router = () => {
   return (
@@ -13,12 +14,13 @@ const Router = () => {
       <BrowserRouter>
       
         <Routes>
+          <Route path="/login" element={<Login/>}/>
           <Route path="/" element={<Navbar/>}>
           <Route index element={<Product />} />
           <Route path="/sho/:id" element={<Sho />} />
           <Route path="/Buy" element={<Buy/>}/>
           <Route path="/Cart" element={<Cart/>}/>
-</Route>
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

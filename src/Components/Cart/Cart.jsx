@@ -1,53 +1,78 @@
-import { Difference } from '@mui/icons-material';
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Cart = () => {
-  // Fetch cart items from localStorage or from state if you're managing it globally
-  const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-  // console.log(cartItems)
+  const [cartItems, setCartItems] = useState([]);
 
-  const arr = []
-
-  for(let i in cartItems){
-    const key = [];
-    key.push(i)
-    key.push(cartItems[i])
-    arr.push(key)
-  }
-  console.log(arr)
-
-  const [pro, setPro] = useState([])
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/`)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setPro(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error.message);
-        setLoading(false);
-      });
+    // Fetch cart items from local storage
+    const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    setCartItems(storedCartItems);
   }, []);
 
-    if(arr.length==pro.length){
-     
+  const updateQuantity = (index, newQuantity) => {
+    const updatedCartItems = [...cartItems];
+    updatedCartItems[index].quantity = newQuantity;
+    if (newQuantity === 0) {
+      console.log("gaib");
+      updatedCartItems.splice(index, 1); // Remove item from array
+      localStorage.setItem('cart', JSON.stringify(updatedCartItems)); // Update local storage
+      window.location.reload(); // Reload the page
+    } else {
+      // Update quantity if not zero
+      setCartItems(updatedCartItems);
+      localStorage.setItem('cart', JSON.stringify(updatedCartItems)); // Update local storage
     }
-
+  };
+  
 
   return (
-    <div>
-      {/* <h1>hello thi cart</h1>
-     
-      {arr.map((val)=><h1>{val[0]} : {val[1]}</h1> )} */}
-      {/* <h1>{pro.(val).title}</h1> */}
+    <div className="container">
+      <div className="row">
+      <div className='col-8'>
+      <h2>Shopping Cart</h2>
+      {cartItems.length === 0 ? (
+        <p>Your cart is empty.</p>
+      ) : (
+        <div>
+          {cartItems.map((item, index) => (
+            <div key={index} className="card mb-3" style={{ maxWidth: '540px' }}>
+              <div className="row g-0">
+                <div className="col-md-4">
+                  <img src={item.image} className="img-fluid rounded-start p-4" alt="Product" />
+                </div>
+                <div className="col-md-8">
+                  <div className="card-body">
+                    <h5 className="card-title">{item.title}</h5>
+                    <div className='d-flex align-items-center justify-content-between'>
+                      <p className='mt-3'>Quantity: {item.quantity}</p>
+                      <div className="btn-group" role="group" aria-label="Basic example">
+                        <button onClick={() => updateQuantity(index, item.quantity - 1)} type="button" className="btn btn-outline-primary"><b>-</b></button>
+                        <button onClick={() => updateQuantity(index, item.quantity + 1)} type="button" className="btn btn-outline-primary"><b>+</b></button>
+                      </div>
+                    </div>
+                    <p className="card-text"><small className="text-muted">Price: ${item.price}</small></p>
+                    <h6 className="card-footer"><small className="text-muted">Total Amount: ${item.price * item.quantity}</small></h6>
+                    <p></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+
+
+
+      </div>
+      <div className="col-4">
+        <h1>Product Details</h1>
+
+      </div>
+      </div>
     </div>
+
+    
   );
 };
 
