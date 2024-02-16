@@ -29,9 +29,9 @@ const Cart = () => {
     <div className="container">
       <div className="row">
       <div className='col-8'>
-      <h2>Shopping Cart</h2>
+      <h1 className='text-primary'>Shopping Cart</h1>
       {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <p className='text-danger fs-3 mt-5'>OOoops...! Your cart is empty.</p>
       ) : (
         <div>
           {cartItems.map((item, index) => (
@@ -52,7 +52,7 @@ const Cart = () => {
                     </div>
                     <p className="card-text"><small className="text-muted">Price: ${item.price}</small></p>
                     <h6 className="card-footer"><small className="text-muted">Total Amount: ${item.price * item.quantity}</small></h6>
-                    <p></p>
+                    
                   </div>
                 </div>
               </div>

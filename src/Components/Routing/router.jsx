@@ -1,26 +1,24 @@
+// Router.jsx
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from '../Navbar/Navbar';
+import Login from '../Login/login';
 import Product from '../Product/product';
 import Sho from '../Product/sho';
 import Buy from '../BuyNow/Buy';
 import Cart from '../Cart/Cart';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Navbar from '../Navbar/Navbar';
-import Login from '../Login/login';
-
 const Router = () => {
   return (
     <div>
       <BrowserRouter>
-      
+        <Navbar />
         <Routes>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/" element={<Navbar/>}>
-          <Route index element={<Product />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/product" element={<Product />} />
           <Route path="/sho/:id" element={<Sho />} />
-          <Route path="/Buy" element={<Buy/>}/>
-          <Route path="/Cart" element={<Cart/>}/>
-          </Route>
+          <Route path="/buy" element={<Buy />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
     </div>

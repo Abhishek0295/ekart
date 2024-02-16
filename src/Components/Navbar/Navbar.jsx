@@ -1,29 +1,26 @@
-import React from 'react'
-import { Outlet,Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn }) => {
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg bg-light">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#"><b>e-KarT</b></a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              <a className="nav-link active" aria-current="page" href="/">Dashboard</a>
-              <Link className="nav-link" to="" >Product</Link>
-              <Link className="nav-link" to="/Cart">Cart</Link>
-
+    <nav className="navbar navbar-expand-lg bg-light">
+      <div className="container-fluid">
+        <a className="navbar-brand" href="/"><b>e-KarT</b></a>
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div className="navbar-nav">
+            {/* Show login link if not logged in */}
+            {!isLoggedIn && <Link className="nav-link" to="/login">Login</Link>}
+            {/* Show product and cart links only if logged in */}
+            {isLoggedIn || <Link className="nav-link" to="/product">Product</Link>}
+            {isLoggedIn || <Link className="nav-link" to="/cart">Cart</Link>}
           </div>
+        </div>
       </div>
-    </div>
-
-</nav>
-<Outlet></Outlet>
-    </div>
-  )
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;
