@@ -60,14 +60,26 @@ const Cart = () => {
           ))}
         </div>
       )}
+</div>
 
 
 
 
-      </div>
+            {/* create the bill of items in cart */}
       <div className="col-4">
-        <h1>Product Details</h1>
-
+        <h2 className='mt-5'>Product Details</h2>
+          <div>
+          <div className="card" style="width: 18rem;">
+              <div className="card-body">
+                <h6 className="card-subtitle mb-2 text-body-secondary"></h6>
+                <p className="card-text">{item.title}</p>
+                <p className="card-text">{/* updated quantity of product */}</p>
+                <h6>{/* add 5% tax of amount */}</h6>
+                <h5>{/* total amount after tax */}</h5>
+                <a href="#" className="card-link">Buy now</a> {/* redirect to Buy.jsx */}
+              </div>
+            </div>
+          </div>
       </div>
       </div>
     </div>

@@ -34,7 +34,8 @@ const Product = () => {
 
   return (
     <>
-      <div className="container-fluid main d-flex flex-wrap">
+      <div className="container-fluid main d-flex flex-wrap ">
+        <h1 className="d-block m-auto mb-3">Sample Products</h1>
         <div className="row d-flex justify-content-center align-self-center">
           {prod.map((data) => (
             <div

@@ -34,7 +34,7 @@ const Login = () => {
   return (
     <div className="container">
       <div className="row d-flex align-items-center justify-content-center">
-        <div className="col-6">
+        <div className="col-6 mt-5">
           <h1>Login</h1>
           <form onSubmit={handleLogin}>
             <input className='mb-3 mt-3 form-control' type="text" placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} required /><br />
@@ -44,6 +44,10 @@ const Login = () => {
         </div>
       </div>
       {error && <div className="error">{error}</div>}
+
+      <div className='d-flex align-item-end justify-content-end text-secondary' style={{fontSize:'12px'}}>
+        <p>Get user name and password from <a target="_blank" href="https://fakestoreapi.com/users">Here.</a></p>
+      </div>
     </div>
   );
 }
